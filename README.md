@@ -76,7 +76,7 @@ my-website/
 ├── 📄 contact.html            # Contact page
 ├── 📄 admin.html              # CMS Dashboard
 ├── 📄 post-detail.html        # Blog post detail page
-├──  css/
+├── 📂 css/
 │   └── style.css              # Main stylesheet with CSS variables
 ├── 📂 js/
 │   ├── script.js              # Frontend JavaScript
@@ -254,252 +254,182 @@ vercel --prod
 - Upload files via FTP to your web hosting provider
 - Ensure all files maintain their relative paths
 - No server-side requirements needed
+
+## 🛠️ Development Tools
+
+### Recommended Setup
+- **VS Code**: Primary code editor
+- **Live Server Extension**: Local development server
+- **Prettier**: Code formatting
+- **ESLint**: JavaScript linting
+
+### Testing Tools
+- **Chrome DevTools**: Debugging and performance
+- **Lighthouse**: Performance and accessibility auditing
+- **Cross-browser Testing**: BrowserStack or similar
+
+## 🎨 Advanced Customization
+
+### Adding Custom Post Types
+1. Modify the category options in `admin.html`
+2. Update the `loadTemplate()` function with new templates
+3. Add corresponding styles in `style.css`
+
+### Implementing Search Functionality
+```javascript
+// Add to admin.js
+function searchPosts(query) {
+    const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+    return posts.filter(post => 
+        post.title.toLowerCase().includes(query.toLowerCase()) ||
+        post.content.toLowerCase().includes(query.toLowerCase())
+    );
+}
+```
+
+### Adding Comment System
+Integrate with external services:
+- **Disqus**: Full-featured commenting
+- **Facebook Comments**: Social integration
+- **GitHub Issues**: Developer-friendly option
+
+### SEO Enhancements
+- **Sitemap Generation**: Create `sitemap.xml`
+- **Meta Tags**: Dynamic meta descriptions
+- **Schema Markup**: Structured data for rich snippets
+- **Open Graph**: Social sharing optimization
+
+## 📊 Performance Optimization
+
+### Image Optimization
+```html
+<!-- Use WebP format with fallback -->
+<picture>
+    <source srcset="image.webp" type="image/webp">
+    <img src="image.jpg" alt="Description" loading="lazy">
+</picture>
+```
+
+### CSS Optimization
+- Use CSS custom properties for theming
+- Minimize unused CSS
+- Implement critical CSS for above-the-fold content
+
+### JavaScript Optimization
+- Lazy load non-critical JavaScript
+- Use efficient DOM manipulation
+- Implement service workers for offline functionality
+
+## 🔐 Security Considerations
+
+### Client-Side Security
+- Sanitize user input in the CMS
+- Validate all form inputs
+- Use HTTPS in production
+
+### Content Security
+- Regular backups of blog data
+- Version control for all changes
+- Input validation and sanitization
+
+## 📈 Analytics & Monitoring
+
+### Recommended Analytics
+```html
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
+```
+
+### Performance Monitoring
+- **Google PageSpeed Insights**: Performance scoring
+- **GTmetrix**: Detailed performance analysis
+- **WebPageTest**: Advanced performance testing
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit your changes**: `git commit -m 'Add amazing feature'`
+4. **Push to the branch**: `git push origin feature/amazing-feature`
+5. **Open a Pull Request**
+
+### Contribution Guidelines
+- Follow existing code style and conventions
+- Add comments for complex functionality
+- Test your changes thoroughly
+- Update documentation as needed
+
+## � License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+MIT License
+
+Copyright (c) 2025 Y Phai Niê
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+
+## � Acknowledgments
+
+- **Quill.js**: Rich text editor
+- **Font Awesome**: Icon library
+- **Google Fonts**: Typography
+- **Unsplash**: Stock photography
+- **CSS-Tricks**: CSS inspiration and tutorials
+
+## � Contact & Support
+
+- **Author**: Y Phai Niê
+- **Email**: phainie03@gmail.com
+- **GitHub**: [@youngestwall](https://github.com/youngestwall)
 - **Portfolio**: [youngestwall.github.io](https://youngestwall.github.io)
 
----
+### Getting Help
+- 📖 **Documentation**: Check this README first
+- � **Bug Reports**: Open an issue on GitHub
+- 💡 **Feature Requests**: Submit an issue with the "enhancement" label
+- � **Questions**: Start a discussion on GitHub
 
-**Made with ❤️ from Vietnam** 🇻🇳
-- **Contact Form**: Form liên hệ với validation
-- **SEO Friendly**: Cấu trúc HTML semantic
-- **Performance Optimized**: CSS và JavaScript được tối ưu
+## 🎯 Roadmap
 
-## 📁 Cấu Trúc Thư Mục
-
-```
-my-website/
-│
-├── index.html          # Trang chủ
-├── about.html          # Trang về tôi
-├── contact.html        # Trang liên hệ
-├── post-detail.html    # Trang chi tiết bài viết
-├── css/
-│   └── style.css       # File CSS chính
-├── js/
-│   └── script.js       # File JavaScript chính
-└── README.md           # File hướng dẫn này
-```
-
-## 🚀 Cách Sử Dụng
-
-### 1. Mở Website
-- Mở file `index.html` bằng trình duyệt web
-- Hoặc sử dụng Live Server extension trong VS Code
-
-### 2. Tùy Chỉnh Nội Dung
-
-#### Thay Đổi Thông Tin Cá Nhân:
-1. **Header**: Sửa tên blog trong `<div class="nav-logo">`
-2. **About Page**: Cập nhật thông tin trong `about.html`
-3. **Contact Info**: Thay đổi email, phone trong `contact.html`
-
-#### Thêm Bài Viết Mới:
-1. Mở file `js/script.js`
-2. Thêm object mới vào `blogPosts`:
-
-```javascript
-5: {
-    title: "Tiêu đề bài viết mới",
-    date: "Ngày đăng",
-    category: "Danh mục",
-    image: "URL hình ảnh",
-    content: `Nội dung HTML của bài viết...`
-}
-```
-
-3. Thêm card bài viết vào `index.html`:
-
-```html
-<article class="post-card">
-    <img src="URL_HINH_ANH" alt="Mô tả" class="post-image">
-    <div class="post-content">
-        <div class="post-meta">
-            <span class="post-date"><i class="far fa-calendar"></i> Ngày</span>
-            <span class="post-category">Danh mục</span>
-        </div>
-        <h3 class="post-title">
-            <a href="post-detail.html?id=5">Tiêu đề bài viết</a>
-        </h3>
-        <p class="post-excerpt">Mô tả ngắn...</p>
-        <a href="post-detail.html?id=5" class="read-more">Đọc Thêm</a>
-    </div>
-</article>
-```
-
-### 3. Tùy Chỉnh Giao Diện
-
-#### Thay Đổi Màu Sắc:
-Sửa các biến CSS trong `css/style.css`:
-
-```css
-:root {
-    --primary-color: #3498db;      /* Màu chính */
-    --secondary-color: #2c3e50;    /* Màu phụ */
-    --accent-color: #e74c3c;       /* Màu nhấn */
-    --background-color: #f8f9fa;   /* Màu nền */
-}
-```
-
-#### Thay Đổi Font:
-```css
-body {
-    font-family: 'Your-Font', sans-serif;
-}
-```
-
-#### Thay Đổi Layout:
-- Grid system trong `.posts-grid`
-- Spacing trong `.container`
-- Breakpoints trong media queries
-
-## 🎨 Customization Guide
-
-### Logo & Branding
-1. Thay đổi tên trong `.nav-logo`
-2. Thêm logo image nếu muốn
-3. Cập nhật favicon
-
-### Images
-- Sử dụng Unsplash URLs hoặc upload images local
-- Recommend size: 800x400px cho featured images
-- Optimize images cho web (WebP format)
-
-### Colors & Typography
-- Primary: #3498db (Blue)
-- Secondary: #2c3e50 (Dark blue)
-- Success: #27ae60 (Green)
-- Warning: #f39c12 (Orange)
-- Danger: #e74c3c (Red)
-
-### Animations
-- Fade in effects cho scroll
-- Hover transitions
-- Mobile menu animations
-- Button hover effects
-
-## 📱 Responsive Breakpoints
-
-```css
-/* Mobile */
-@media (max-width: 768px)
-
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1024px)
-
-/* Desktop */
-@media (min-width: 1025px)
-```
-
-## 🔧 Advanced Features
-
-### Adding Comments System
-Integrate với:
-- Disqus
-- Facebook Comments
-- Custom comment system
-
-### Adding Search
-- Implement với JavaScript
-- Use Algolia search
-- Simple keyword filtering
-
-### Analytics
-- Google Analytics
-- Google Search Console
-- Facebook Pixel
-
-### Performance Optimization
-- Lazy loading images
-- Minify CSS/JS
-- Enable compression
-- CDN integration
-
-## 🚀 Deployment Options
-
-### 1. GitHub Pages
-1. Upload code lên GitHub repository
-2. Enable GitHub Pages trong Settings
-3. Access tại `username.github.io/repository-name`
-
-### 2. Netlify
-1. Drag & drop folder vào Netlify
-2. Custom domain setup
-3. Continuous deployment từ Git
-
-### 3. Vercel
-1. Import từ GitHub
-2. Auto deployment
-3. Custom domain
-
-### 4. Traditional Hosting
-- Upload files via FTP
-- Shared hosting services
-- VPS setup
-
-## 🛠️ Tools & Resources
-
-### Development
-- VS Code with Live Server
-- Chrome DevTools
-- Git for version control
-
-### Design Resources
-- Unsplash (Free images)
-- Font Awesome (Icons)
-- Google Fonts
-- Color Hunt (Color palettes)
-
-### Testing
-- Mobile-Friendly Test (Google)
-- PageSpeed Insights
-- Cross-browser testing
-
-## 📝 SEO Tips
-
-1. **Meta Tags**: Thêm description, keywords
-2. **Alt Text**: Mô tả cho tất cả images
-3. **Heading Structure**: Sử dụng H1, H2, H3 đúng cách
-4. **Internal Linking**: Liên kết giữa các pages
-5. **Sitemap**: Tạo sitemap.xml
-6. **Schema Markup**: Structured data
-
-## 🐛 Troubleshooting
-
-### Common Issues:
-1. **Images không load**: Check đường dẫn file
-2. **Mobile menu không hoạt động**: Check JavaScript console
-3. **CSS không apply**: Clear browser cache
-4. **Font awesome icons không hiển thị**: Check CDN link
-
-### Browser Compatibility:
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
-
-## 📞 Support
-
-Nếu gặp vấn đề hoặc cần hỗ trợ:
-- Tạo issue trên GitHub
-- Email: contact@myblog.com
-- Check documentation online
-
-## 📄 License
-
-Dự án này được phát hành dưới MIT License. Bạn có thể sử dụng, modify và distribute tự do.
-
-## 🎯 Future Enhancements
-
-- [ ] Dark mode toggle
-- [ ] Search functionality
-- [ ] Categories filter
-- [ ] RSS feed
-- [ ] Newsletter subscription
+### Version 2.0 (Planned)
+- [ ] Dark mode implementation
+- [ ] Advanced search with filters
+- [ ] Comment system integration
+- [ ] RSS feed generation
 - [ ] Multi-language support
-- [ ] Progressive Web App (PWA)
-- [ ] Content Management System (CMS)
+- [ ] Progressive Web App (PWA) features
+- [ ] Advanced analytics dashboard
+- [ ] Email newsletter integration
+
+### Version 2.1 (Future)
+- [ ] Real-time collaborative editing
+- [ ] Advanced SEO tools
+- [ ] Content scheduling
+- [ ] Social media integration
+- [ ] Performance dashboard
+- [ ] A/B testing capabilities
 
 ---
 
-**Happy Blogging! 🎉**
+**⭐ Star this repository if you found it helpful!**
 
-Nếu bạn sử dụng template này, hãy star ⭐ repository và share với bạn bè nhé!
+**🚀 Happy Blogging!** Made with ❤️ from Vietnam 🇻🇳
