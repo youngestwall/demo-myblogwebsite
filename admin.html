@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Dashboard - Y Phai Niê</title>
+    <meta name="description" content="Dashboard quản lý blog chuyên nghiệp">
+    <link rel="icon" type="image/png" href="https://github.com/youngestwall.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Rich Text Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .admin-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .admin-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 200px;
+            resize: vertical;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(108, 117, 125, 0.1);
+            color: var(--text-secondary);
+            border: 2px solid rgba(108, 117, 125, 0.2);
+        }
+        
+        .posts-list {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .post-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+        }
+        
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        
+        .post-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-primary);
+        }
+        
+        .post-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        .preview-area {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            min-height: 200px;
+        }
+        
+        /* Rich Text Editor Styling - Microsoft Word-like */
+        .editor-container {
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            background: white;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .ql-editor {
+            min-height: 400px;
+            max-height: 600px;
+            overflow-y: auto;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 20px 25px;
+            border: none;
+            background: white;
+        }
+        
+        .ql-toolbar {
+            border: none;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 12px 16px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .ql-container {
+            border-radius: 0 0 12px 12px;
+            border: none;
+            font-family: inherit;
+        }
+        
+        /* Toolbar buttons styling */
+        .ql-toolbar .ql-picker-label,
+        .ql-toolbar button {
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 6px;
+            padding: 6px 10px;
+            margin: 2px;
+            background: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .ql-toolbar .ql-picker-label:hover,
+        .ql-toolbar button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        .ql-toolbar .ql-stroke {
+            stroke: #495057;
+            transition: stroke 0.2s ease;
+        }
+        
+        .ql-toolbar .ql-fill {
+            fill: #495057;
+            transition: fill 0.2s ease;
+        }
+        
+        .ql-toolbar button:hover .ql-stroke {
+            stroke: white;
+        }
+        
+        .ql-toolbar button:hover .ql-fill {
+            fill: white;
+        }
+        
+        .ql-toolbar .ql-active {
+            background: var(--primary-color) !important;
+            color: white !important;
+        }
+        
+        .ql-toolbar .ql-active .ql-stroke {
+            stroke: white !important;
+        }
+        
+        .ql-toolbar .ql-active .ql-fill {
+            fill: white !important;
+        }
+        
+        /* Editor placeholder */
+        .ql-editor.ql-blank::before {
+            font-style: italic;
+            color: #adb5bd;
+            font-size: 14px;
+            left: 25px;
+            right: 25px;
+        }
+        
+        /* Toolbar groups */
+        .ql-formats {
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        .ql-formats:last-child {
+            margin-right: 0;
+        }
+        
+        /* Dropdown menus */
+        .ql-picker.ql-expanded .ql-picker-options {
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        
+        .ql-picker-options .ql-picker-item {
+            padding: 8px 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .ql-picker-options .ql-picker-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Word count styling */
+        .word-count {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 1px solid rgba(102, 126, 234, 0.1);
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .word-count > div:first-child {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .word-count > div:last-child {
+            font-style: italic;
+        }
+        
+        /* Editor actions */
+        .editor-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        .editor-btn {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            color: var(--text-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .editor-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Template selector */
+        .template-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .template-btn {
+            background: white;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .template-btn:hover, .template-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+            border-color: transparent;
+        }
+        
+        /* Content styling inside editor */
+        .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            color: #2c3e50;
+        }
+        
+        .ql-editor h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 8px;
+        }
+        
+        .ql-editor h2 {
+            font-size: 1.6rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+            padding-bottom: 6px;
+        }
+        
+        .ql-editor h3 {
+            font-size: 1.3rem;
+        }
+        
+        .ql-editor p {
+            margin: 1rem 0;
+        }
+        
+        .ql-editor blockquote {
+            border-left: 4px solid var(--primary-color);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        
+        .ql-editor code {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-color);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        .ql-editor pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .ql-editor ul, .ql-editor ol {
+            padding-left: 2rem;
+        }
+        
+        .ql-editor li {
+            margin: 0.5rem 0;
+        }
+        
+        /* Scrollbar styling for editor */
+        .ql-editor::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .ql-editor::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .ql-editor::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        .ql-editor::-webkit-scrollbar-thumb:hover {
+            background: #5a67d8;
+        }
+        
+        .ql-editor.ql-blank::before {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* Toolbar customization */
+        .ql-formats {
+            margin-right: 15px;
+        }
+        
+        .ql-picker.ql-expanded .ql-picker-options {
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        /* Word count styling */
+        .word-count {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(248, 250, 252, 0.8);
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 0 0 10px 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .editor-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .editor-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            background: white;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .editor-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .template-selector {
+            margin-bottom: 1rem;
+        }
+        
+        .template-btn {
+            padding: 0.4rem 0.8rem;
+            margin: 0.2rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            background: white;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .template-btn:hover, .template-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-container {
+                padding: 1rem;
+            }
+            
+            .ql-editor {
+                min-height: 250px;
+            }
+            
+            .ql-toolbar {
+                padding: 8px;
+            }
+            
+            .ql-formats {
+                margin-right: 8px;
+            }
+        }
+    </style>
+</head>
+<body style="background: var(--background-light); min-height: 100vh;">
+    <!-- Navigation -->
+    <nav style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); position: sticky; top: 0; z-index: 1000;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <img src="https://github.com/youngestwall.png" alt="Y Phai Niê" style="width: 40px; height: 40px; border-radius: 50%;">
+                <span style="font-weight: 800; font-size: 1.2rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Blog Dashboard</span>
+            </div>
+            
+            <div style="display: flex; gap: 1rem;">
+                <a href="index.html" class="btn btn-secondary btn-small">
+                    <i class="fas fa-home"></i>
+                    Xem Blog
+                </a>
+                <button onclick="exportBlog()" class="btn btn-primary btn-small">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="admin-header">
+            <h1 style="margin: 0 0 0.5rem 0; font-size: 2rem;">📝 Blog Management System</h1>
+            <p style="margin: 0; opacity: 0.9;">Quản lý blog chuyên nghiệp - Viết bài và xuất bản dễ dàng</p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="admin-grid">
+            <!-- Post Editor -->
+            <div class="admin-card">
+                <h2 style="margin-top: 0; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-edit" style="color: var(--primary-color);"></i>
+                    Viết Bài Mới
+                </h2>
+                
+                <form id="postForm">
+                    <div class="form-group">
+                        <label class="form-label">Tiêu đề bài viết:</label>
+                        <input type="text" id="postTitle" class="form-input" placeholder="Nhập tiêu đề hấp dẫn..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Danh mục:</label>
+                        <select id="postCategory" class="form-select" required>
+                            <option value="">Chọn danh mục</option>
+                            <option value="🤖 AI & Machine Learning">🤖 AI & Machine Learning</option>
+                            <option value="💻 Web Development">💻 Web Development</option>
+                            <option value="🔥 Công Nghệ">🔥 Công Nghệ</option>
+                            <option value="📱 Mobile Development">📱 Mobile Development</option>
+                            <option value="🎯 Tips & Tricks">🎯 Tips & Tricks</option>
+                            <option value="📚 Học Tập">📚 Học Tập</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">URL Hình ảnh:</label>
+                        <input type="url" id="postImage" class="form-input" placeholder="https://images.unsplash.com/...">
+                        <small style="color: var(--text-secondary); font-size: 0.8rem;">Gợi ý: Sử dụng Unsplash hoặc Pexels</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Mô tả ngắn:</label>
+                        <textarea id="postExcerpt" class="form-input" rows="3" placeholder="Viết mô tả ngắn gọn về bài viết..." style="min-height: 80px;" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">📝 Template bài viết:</label>
+                        <div class="template-selector">
+                            <button type="button" class="template-btn" onclick="loadTemplate('blog')">📰 Blog Post</button>
+                            <button type="button" class="template-btn" onclick="loadTemplate('tutorial')">📚 Tutorial</button>
+                            <button type="button" class="template-btn" onclick="loadTemplate('review')">⭐ Review</button>
+                            <button type="button" class="template-btn" onclick="loadTemplate('news')">📰 News</button>
+                            <button type="button" class="template-btn" onclick="loadTemplate('technical')">⚙️ Technical</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nội dung bài viết (Rich Editor):</label>
+                        
+                        <!-- Rich Text Editor -->
+                        <div class="editor-container">
+                            <div id="postContentEditor" style="height: 400px;"></div>
+                            
+                            <div class="word-count">
+                                <div>
+                                    <span id="wordCount">0 từ</span> • 
+                                    <span id="charCount">0 ký tự</span> • 
+                                    <span id="readTime">0 phút đọc</span>
+                                </div>
+                                <div>
+                                    <span id="lastSaved">Chưa lưu</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Editor Actions -->
+                        <div class="editor-actions">
+                            <button type="button" class="editor-btn" onclick="insertEmoji()">😀 Emoji</button>
+                            <button type="button" class="editor-btn" onclick="insertTable()">📊 Bảng</button>
+                            <button type="button" class="editor-btn" onclick="insertCodeSnippet()">💻 Code</button>
+                            <button type="button" class="editor-btn" onclick="insertQuote()">💬 Quote</button>
+                            <button type="button" class="editor-btn" onclick="insertDivider()">➖ Divider</button>
+                            <button type="button" class="editor-btn" onclick="spellCheck()">✓ Spell Check</button>
+                            <button type="button" class="editor-btn" onclick="exportToWord()">📄 Export Word</button>
+                        </div>
+                        
+                        <!-- Hidden textarea for backward compatibility -->
+                        <textarea id="postContent" class="form-textarea" style="display: none;" placeholder="Nội dung HTML sẽ được tạo tự động..."></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button type="button" onclick="previewPost()" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i>
+                            Xem trước
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Lưu bài viết
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Preview Area -->
+            <div class="admin-card">
+                <h2 style="margin-top: 0; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-eye" style="color: var(--secondary-color);"></i>
+                    Xem Trước
+                </h2>
+                
+                <div id="previewArea" class="preview-area">
+                    <p style="text-align: center; color: var(--text-secondary); font-style: italic;">
+                        Nhấn "Xem trước" để preview bài viết của bạn
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts List -->
+        <div class="posts-list">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="margin: 0; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-list" style="color: var(--accent-color);"></i>
+                    Danh Sách Bài Viết
+                </h2>
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="clearAllPosts()" class="btn btn-secondary btn-small">
+                        <i class="fas fa-trash"></i>
+                        Xóa tất cả
+                    </button>
+                    <span id="postCount" style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                        0 bài viết
+                    </span>
+                </div>
+            </div>
+            
+            <div id="postsList">
+                <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                    <i class="fas fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                    <p>Chưa có bài viết nào. Hãy tạo bài viết đầu tiên!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                <div style="background: var(--primary-gradient); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.2rem;">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 style="margin: 0; color: var(--text-primary);" id="totalPosts">0</h3>
+                <p style="margin: 0.5rem 0 0; color: var(--text-secondary); font-size: 0.9rem;">Tổng số bài</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                <div style="background: var(--secondary-gradient); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.2rem;">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3 style="margin: 0; color: var(--text-primary);" id="totalCategories">0</h3>
+                <p style="margin: 0.5rem 0 0; color: var(--text-secondary); font-size: 0.9rem;">Danh mục</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 15px; padding: 1.5rem; text-align: center;">
+                <div style="background: var(--accent-gradient); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.2rem;">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <h3 style="margin: 0; color: var(--text-primary);" id="lastUpdate">-</h3>
+                <p style="margin: 0.5rem 0 0; color: var(--text-secondary); font-size: 0.9rem;">Cập nhật cuối</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="position: fixed; top: 20px; right: 20px; background: var(--primary-gradient); color: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transform: translateX(400px); transition: all 0.3s ease; z-index: 2000;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Thông báo</span>
+        </div>
+    </div>
+
+    <!-- Rich Text Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        // Rich Text Editor Enhancement - Word-like Experience
+        let quill;
+        let autoSaveInterval;
+        
+        // Initialize Quill editor when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for admin.js to load first
+            setTimeout(() => {
+                initializeQuillEditor();
+            }, 500);
+        });
+        
+        function initializeQuillEditor() {
+            try {
+                // Configure advanced toolbar
+                const toolbarOptions = [
+                    // Font and size
+                    [{ 'font': ['Inter', 'serif', 'monospace'] }],
+                    [{ 'size': ['small', false, 'large', 'huge'] }],
+                    
+                    // Text formatting
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    
+                    // Headers and blocks
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['blockquote', 'code-block'],
+                    
+                    // Lists and alignment
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    
+                    // Media and links
+                    ['link', 'image', 'video'],
+                    
+                    // Advanced features
+                    ['formula'],
+                    ['clean']
+                ];
+                
+                // Configure Quill editor with advanced features
+                quill = new Quill('#postContentEditor', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: toolbarOptions,
+                        keyboard: {
+                            bindings: {
+                                // Ctrl+S to save
+                                saveBinding: {
+                                    key: 'S',
+                                    ctrlKey: true,
+                                    handler: function() {
+                                        savePostQuill();
+                                        return false;
+                                    }
+                                },
+                                // Ctrl+B for bold
+                                bold: {
+                                    key: 'B',
+                                    ctrlKey: true,
+                                    handler: function() {
+                                        this.quill.format('bold', !this.quill.getFormat().bold);
+                                        return false;
+                                    }
+                                },
+                                // Ctrl+I for italic
+                                italic: {
+                                    key: 'I',
+                                    ctrlKey: true,
+                                    handler: function() {
+                                        this.quill.format('italic', !this.quill.getFormat().italic);
+                                        return false;
+                                    }
+                                },
+                                // Ctrl+U for underline
+                                underline: {
+                                    key: 'U',
+                                    ctrlKey: true,
+                                    handler: function() {
+                                        this.quill.format('underline', !this.quill.getFormat().underline);
+                                        return false;
+                                    }
+                                }
+                            }
+                        },
+                        history: {
+                            delay: 2000,
+                            maxStack: 500,
+                            userOnly: true
+                        }
+                    },
+                    formats: [
+                        'font', 'size', 'bold', 'italic', 'underline', 'strike',
+                        'color', 'background', 'script', 'header', 'blockquote', 'code-block',
+                        'list', 'bullet', 'indent', 'align', 'link', 'image', 'video',
+                        'formula'
+                    ],
+                    placeholder: '✍️ Bắt đầu viết bài viết tuyệt vời của bạn... (Hỗ trợ Ctrl+S để lưu, Ctrl+B/I/U để định dạng)'
+                });
+                
+                // Set up event handlers
+                quill.on('text-change', function() {
+                    document.getElementById('postContent').value = quill.root.innerHTML;
+                    updateWordCount();
+                    markAsUnsaved();
+                });
+                
+                // Set focus to editor
+                quill.focus();
+                
+                // Setup auto-save
+                setupAutoSave();
+                
+                // Initialize word count
+                updateWordCount();
+                
+                // Load any existing draft
+                loadDraft();
+                
+                console.log('✅ Quill editor initialized successfully!');
+                
+            } catch (error) {
+                console.error('❌ Error initializing Quill editor:', error);
+                alert('⚠️ Có lỗi khi khởi tạo editor. Vui lòng refresh trang!');
+            }
+        }
+        
+        // Word count and statistics - Enhanced
+        function updateWordCount() {
+            if (!quill) return;
+            
+            const text = quill.getText().trim();
+            const words = text ? text.split(/\s+/).filter(word => word.length > 0).length : 0;
+            const chars = text.length;
+            const charsNoSpaces = text.replace(/\s/g, '').length;
+            const paragraphs = text ? text.split('\n').filter(p => p.trim().length > 0).length : 0;
+            const readTime = Math.max(1, Math.ceil(words / 200));
+            
+            document.getElementById('wordCount').textContent = `${words} từ`;
+            document.getElementById('charCount').textContent = `${chars} ký tự (${charsNoSpaces} không khoảng trắng)`;
+            document.getElementById('readTime').textContent = `${readTime} phút đọc • ${paragraphs} đoạn`;
+        }
+        
+        // Enhanced auto-save functionality
+        function setupAutoSave() {
+            // Clear any existing interval
+            if (autoSaveInterval) {
+                clearInterval(autoSaveInterval);
+            }
+            
+            autoSaveInterval = setInterval(() => {
+                if (!quill) return;
+                
+                const title = document.getElementById('postTitle').value;
+                const content = quill.root.innerHTML;
+                
+                if (title.trim() || (content && content !== '<p><br></p>')) {
+                    const draft = {
+                        title: title || '',
+                        category: document.getElementById('postCategory').value || '',
+                        excerpt: document.getElementById('postExcerpt').value || '',
+                        content: content,
+                        image: document.getElementById('postImage').value || '',
+                        lastSaved: Date.now()
+                    };
+                    
+                    localStorage.setItem('blogDraft', JSON.stringify(draft));
+                    updateLastSaved('auto');
+                }
+            }, 15000); // Auto-save every 15 seconds
+        }
+        
+        function updateLastSaved(type = 'manual') {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            const lastSavedElement = document.getElementById('lastSaved');
+            if (!lastSavedElement) return;
+            
+            if (type === 'auto') {
+                lastSavedElement.textContent = `💾 Tự động lưu ${timeStr}`;
+                lastSavedElement.style.color = '#22c55e';
+            } else if (type === 'manual') {
+                lastSavedElement.textContent = `✅ Đã lưu ${timeStr}`;
+                lastSavedElement.style.color = '#667eea';
+            } else {
+                lastSavedElement.textContent = `⏰ Chưa lưu`;
+                lastSavedElement.style.color = '#ef4444';
+            }
+        }
+        
+        function markAsUnsaved() {
+            const lastSavedElement = document.getElementById('lastSaved');
+            if (!lastSavedElement) return;
+            
+            lastSavedElement.textContent = `⚠️ Có thay đổi chưa lưu`;
+            lastSavedElement.style.color = '#f59e0b';
+        }
+        
+        // Load draft functionality
+        function loadDraft() {
+            const draft = localStorage.getItem('blogDraft');
+            if (draft && quill) {
+                try {
+                    const draftData = JSON.parse(draft);
+                    const lastSaved = new Date(draftData.lastSaved);
+                    const now = new Date();
+                    
+                    // Only show draft if it's less than 7 days old
+                    if (now - lastSaved < 7 * 24 * 60 * 60 * 1000) {
+                        const lastSavedStr = lastSaved.toLocaleString('vi-VN');
+                        if (confirm(`📝 Tìm thấy bản nháp từ ${lastSavedStr}.\n\nBạn muốn tiếp tục viết bản nháp này không?`)) {
+                            document.getElementById('postTitle').value = draftData.title || '';
+                            document.getElementById('postCategory').value = draftData.category || '';
+                            document.getElementById('postExcerpt').value = draftData.excerpt || '';
+                            document.getElementById('postImage').value = draftData.image || '';
+                            
+                            if (draftData.content && draftData.content !== '<p><br></p>') {
+                                quill.root.innerHTML = draftData.content;
+                                document.getElementById('postContent').value = draftData.content;
+                            }
+                            
+                            updateWordCount();
+                            updateLastSaved('auto');
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error loading draft:', e);
+                }
+            }
+        }
+        
+        // Enhanced template functions with better formatting
+        function loadTemplate(type) {
+            if (!quill) {
+                alert('⚠️ Editor chưa sẵn sàng. Vui lòng thử lại sau giây lát.');
+                return;
+            }
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.template-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            
+            const templates = {
+                blog: `
+                    <h1>🚀 Tiêu đề blog hấp dẫn</h1>
+                    
+                    <p><em>Mở đầu thu hút người đọc với câu hỏi hoặc thống kê thú vị...</em></p>
+                    
+                    <h2>📖 Giới thiệu</h2>
+                    <p>Giới thiệu chủ đề chính của bài viết. Tại sao điều này quan trọng?</p>
+                    
+                    <h2>📚 Nội dung chính</h2>
+                    <p><strong>Điểm quan trọng 1:</strong> Phát triển ý tưởng với ví dụ cụ thể...</p>
+                    
+                    <blockquote>
+                        <p>"Trích dẫn ấn tượng hoặc thống kê để củng cố luận điểm"</p>
+                    </blockquote>
+                    
+                    <h3>📌 Các bước thực hiện:</h3>
+                    <ol>
+                        <li>Bước 1: Mô tả chi tiết</li>
+                        <li>Bước 2: Hướng dẫn cụ thể</li>
+                        <li>Bước 3: Kết quả mong đợi</li>
+                    </ol>
+                    
+                    <h2>💡 Kết luận và Call-to-Action</h2>
+                    <p>Tóm tắt những điểm chính và khuyến khích người đọc hành động...</p>
+                `,
+                tutorial: `
+                    <h1>� Hướng dẫn chi tiết: [Tên Tutorial]</h1>
+                    
+                    <h2>🎯 Mục tiêu</h2>
+                    <p>Sau khi hoàn thành tutorial này, bạn sẽ có thể:</p>
+                    <ul>
+                        <li>Kỹ năng 1</li>
+                        <li>Kỹ năng 2</li>
+                        <li>Kỹ năng 3</li>
+                    </ul>
+                    
+                    <h2>📋 Yêu cầu trước khi bắt đầu</h2>
+                    <ul>
+                        <li>✅ Kiến thức cơ bản về...</li>
+                        <li>✅ Công cụ cần thiết: ...</li>
+                        <li>✅ Thời gian ước tính: X phút</li>
+                    </ul>
+                    
+                    <h2>�️ Bước 1: Chuẩn bị môi trường</h2>
+                    <p>Hướng dẫn chi tiết về việc chuẩn bị...</p>
+                    
+                    <pre><code>// Code setup example
+npm install package-name</code></pre>
+                    
+                    <h2>⚙️ Bước 2: Triển khai</h2>
+                    <p>Thực hiện từng bước một cách cẩn thận...</p>
+                    
+                    <h3>💻 Code Example:</h3>
+                    <pre><code>function example() {
+    // Giải thích code
+    return "Hello World";
+}</code></pre>
+                    
+                    <h2>✅ Bước 3: Kiểm tra kết quả</h2>
+                    <p>Cách verify và troubleshoot...</p>
+                    
+                    <h2>🎉 Chúc mừng!</h2>
+                    <p>Bạn đã hoàn thành tutorial. Tiếp theo có thể học...</p>
+                `,
+                review: `
+                    <h1>⭐ Review: [Tên sản phẩm/dịch vụ]</h1>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h2 style="margin-top: 0;">📊 Đánh giá tổng quan</h2>
+                        <p><strong>Điểm số:</strong> ⭐⭐⭐⭐⭐ (X/10)</p>
+                        <p><strong>Khuyến nghị:</strong> Có/Không nên sử dụng</p>
+                    </div>
+                    
+                    <h2>📝 Giới thiệu</h2>
+                    <p>Mô tả ngắn gọn về sản phẩm/dịch vụ được review...</p>
+                    
+                    <h2>✅ Ưu điểm nổi bật</h2>
+                    <ul>
+                        <li><strong>Điểm mạnh 1:</strong> Mô tả chi tiết</li>
+                        <li><strong>Điểm mạnh 2:</strong> Ví dụ cụ thể</li>
+                        <li><strong>Điểm mạnh 3:</strong> So sánh với đối thủ</li>
+                    </ul>
+                    
+                    <h2>❌ Nhược điểm cần lưu ý</h2>
+                    <ul>
+                        <li><strong>Điểm yếu 1:</strong> Phân tích khách quan</li>
+                        <li><strong>Điểm yếu 2:</strong> Ảnh hưởng đến người dùng</li>
+                    </ul>
+                    
+                    <h2>� Giá cả và giá trị</h2>
+                    <p>Phân tích về mức giá và tính đáng đồng tiền...</p>
+                    
+                    <h2>🤔 Nên dành cho ai?</h2>
+                    <p>Đối tượng phù hợp và không phù hợp...</p>
+                    
+                    <h2>�💭 Kết luận cá nhân</h2>
+                    <blockquote>
+                        <p>Ý kiến chủ quan và khuyến nghị cuối cùng...</p>
+                    </blockquote>
+                `,
+                news: `
+                    <h1>📰 [Tiêu đề tin tức nóng hổi]</h1>
+                    
+                    <p><em>🗓️ Ngày đăng: ${new Date().toLocaleDateString('vi-VN')}</em></p>
+                    <p><em>📍 Nguồn: [Tên nguồn tin]</em></p>
+                    
+                    <div style="background: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 20px 0;">
+                        <h2 style="margin-top: 0;">🔥 Điểm nổi bật</h2>
+                        <ul>
+                            <li>Thông tin quan trọng số 1</li>
+                            <li>Thông tin quan trọng số 2</li>
+                            <li>Thông tin quan trọng số 3</li>
+                        </ul>
+                    </div>
+                    
+                    <h2>📖 Bối cảnh</h2>
+                    <p>Thông tin nền tảng để hiểu rõ vấn đề...</p>
+                    
+                    <h2>📊 Chi tiết sự kiện</h2>
+                    <p>Mô tả chi tiết về diễn biến, tác động...</p>
+                    
+                    <h3>� Số liệu thống kê:</h3>
+                    <ul>
+                        <li>Thống kê 1: XX%</li>
+                        <li>Thống kê 2: YY triệu</li>
+                        <li>Thống kê 3: ZZ lần</li>
+                    </ul>
+                    
+                    <h2>�💬 Ý kiến chuyên gia</h2>
+                    <blockquote>
+                        <p>"Trích dẫn từ chuyên gia hoặc người trong cuộc..."</p>
+                        <cite>- Tên chuyên gia, Chức vụ</cite>
+                    </blockquote>
+                    
+                    <h2>🔮 Tác động và triển vọng</h2>
+                    <p>Phân tích về ảnh hưởng trong tương lai...</p>
+                `,
+                technical: `
+                    <h1>⚙️ Technical Deep Dive: [Chủ đề kỹ thuật]</h1>
+                    
+                    <h2>📋 Tóm tắt Executive</h2>
+                    <p>Mô tả ngắn gọn về vấn đề kỹ thuật và giải pháp...</p>
+                    
+                    <div style="background: #fff3cd; padding: 15px; border: 1px solid #ffeaa7; border-radius: 8px; margin: 20px 0;">
+                        <p><strong>⚠️ Lưu ý:</strong> Bài viết này có tính chất kỹ thuật cao, phù hợp với developers có kinh nghiệm.</p>
+                    </div>
+                    
+                    <h2>🎯 Mục tiêu và scope</h2>
+                    <ul>
+                        <li>Mục tiêu 1: Giải quyết vấn đề X</li>
+                        <li>Mục tiêu 2: Tối ưu performance Y</li>
+                        <li>Scope: Áp dụng cho hệ thống Z</li>
+                    </ul>
+                    
+                    <h2>🔍 Phân tích vấn đề</h2>
+                    <p>Root cause analysis và impact assessment...</p>
+                    
+                    <h3>📊 Performance Metrics:</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr style="background: #f5f5f5;">
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Metric</th>
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Before</th>
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">After</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Response Time</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">500ms</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">200ms</td>
+                        </tr>
+                    </table>
+                    
+                    <h2>�️ Giải pháp kỹ thuật</h2>
+                    <p>Mô tả approach và architecture...</p>
+                    
+                    <h3>💻 Implementation:</h3>
+                    <pre><code>// Main function implementation
+function optimizedSolution() {
+    // Step 1: Initialize
+    const config = {
+        timeout: 5000,
+        retries: 3
+    };
+    
+    // Step 2: Process
+    try {
+        const result = processData(config);
+        return result;
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+// Helper function
+function processData(config) {
+    // Your implementation here
+    return "Success";
+}</code></pre>
+                    
+                    <h2>📈 Kết quả và Performance</h2>
+                    <p>Đánh giá hiệu suất sau khi implement...</p>
+                    
+                    <h2>🔄 Best Practices và Lessons Learned</h2>
+                    <ul>
+                        <li>Best practice 1</li>
+                        <li>Lesson learned 1</li>
+                        <li>Future improvements</li>
+                    </ul>
+                    
+                    <h2>📚 Tài liệu tham khảo</h2>
+                    <ul>
+                        <li><a href="#">Link 1: Documentation</a></li>
+                        <li><a href="#">Link 2: Research paper</a></li>
+                    </ul>
+                `
+            };
+            
+            if (templates[type]) {
+                quill.root.innerHTML = templates[type];
+                document.getElementById('postContent').value = templates[type];
+                updateWordCount();
+                updateLastSaved();
+                
+                // Show success message
+                showToastMessage(`✅ Đã tải template ${type.toUpperCase()}! Bạn có thể chỉnh sửa theo ý muốn.`);
+            }
+        }
+        
+        // Enhanced editor functions with Microsoft Word-like features
+        function insertEmoji() {
+            if (!quill) return;
+            
+            const emojis = [
+                '😀', '😂', '😍', '🤔', '👍', '❤️', '🚀', '💡', '🔥', '⭐', 
+                '✅', '❌', '📚', '💻', '🎯', '📝', '🎉', '💪', '🌟', '📊',
+                '🏆', '💎', '🎪', '🌈', '⚡', '🔮', '🎭', '🎨', '🎵', '🍎'
+            ];
+            
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            const range = quill.getSelection();
+            
+            if (range) {
+                quill.insertText(range.index, emoji + ' ');
+                quill.setSelection(range.index + 2);
+            } else {
+                quill.insertText(quill.getLength() - 1, emoji + ' ');
+            }
+        }
+        
+        function insertTable() {
+            if (!quill) return;
+            
+            const tableHTML = `
+                <table style="border-collapse: collapse; width: 100%; margin: 1rem 0; border: 2px solid #e1e5e9;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-weight: 600;">Tiêu đề 1</th>
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-weight: 600;">Tiêu đề 2</th>
+                            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-weight: 600;">Tiêu đề 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f8f9fa;">
+                            <td style="border: 1px solid #ddd; padding: 10px;">Dữ liệu 1</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Dữ liệu 2</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Dữ liệu 3</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Dữ liệu 4</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Dữ liệu 5</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Dữ liệu 6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            
+            const range = quill.getSelection() || { index: quill.getLength() - 1 };
+            quill.clipboard.dangerouslyPasteHTML(range.index, tableHTML);
+            showToastMessage('📊 Đã chèn bảng! Bạn có thể click để chỉnh sửa nội dung.');
+        }
+        
+        function insertCodeSnippet() {
+            if (!quill) return;
+            
+            const range = quill.getSelection();
+            if (range && range.length > 0) {
+                quill.formatText(range.index, range.length, 'code-block', true);
+                showToastMessage('💻 Đã định dạng thành code block!');
+            } else {
+                const codeTemplate = `// Code example
+function helloWorld() {
+    console.log("Hello, World!");
+    return "Success";
+}
+
+// Call the function
+helloWorld();`;
+                
+                const insertIndex = range ? range.index : quill.getLength() - 1;
+                quill.insertText(insertIndex, '\n');
+                quill.insertText(insertIndex + 1, codeTemplate);
+                quill.formatText(insertIndex + 1, codeTemplate.length, 'code-block', true);
+                showToastMessage('💻 Đã chèn code snippet mẫu!');
+            }
+        }
+        
+        function insertQuote() {
+            if (!quill) return;
+            
+            const range = quill.getSelection();
+            if (range && range.length > 0) {
+                quill.formatText(range.index, range.length, 'blockquote', true);
+                showToastMessage('💬 Đã định dạng thành quote!');
+            } else {
+                const quoteText = '"Thành công không phải là chìa khóa của hạnh phúc. Hạnh phúc là chìa khóa của thành công."';
+                const insertIndex = range ? range.index : quill.getLength() - 1;
+                quill.insertText(insertIndex, '\n' + quoteText + '\n');
+                quill.formatText(insertIndex + 1, quoteText.length, 'blockquote', true);
+                showToastMessage('💬 Đã chèn quote mẫu!');
+            }
+        }
+        
+        function insertDivider() {
+            if (!quill) return;
+            
+            const dividerHTML = '<hr style="border: none; border-top: 3px solid #e1e5e9; margin: 2rem 0; background: linear-gradient(to right, #667eea, #764ba2); height: 3px; border-radius: 2px;">';
+            const range = quill.getSelection() || { index: quill.getLength() - 1 };
+            
+            quill.clipboard.dangerouslyPasteHTML(range.index, '\n' + dividerHTML + '\n');
+            showToastMessage('➖ Đã chèn đường phân cách!');
+        }
+        
+        function spellCheck() {
+            if (!quill) return;
+            
+            // Advanced spell check functionality
+            const text = quill.getText();
+            
+            // Common Vietnamese typos and corrections
+            const corrections = [
+                { wrong: /\bko\b/gi, correct: 'không' },
+                { wrong: /\bdc\b/gi, correct: 'được' },
+                { wrong: /\bk\b/gi, correct: 'không' },
+                { wrong: /\bmk\b/gi, correct: 'mình' },
+                { wrong: /\bms\b/gi, correct: 'mọi người' },
+                { wrong: /\bvs\b/gi, correct: 'với' },
+                { wrong: /\bcx\b/gi, correct: 'cũng' },
+                { wrong: /\bnx\b/gi, correct: 'nữa' }
+            ];
+            
+            let correctedCount = 0;
+            let currentContent = quill.root.innerHTML;
+            
+            corrections.forEach(correction => {
+                const matches = currentContent.match(correction.wrong);
+                if (matches) {
+                    correctedCount += matches.length;
+                    currentContent = currentContent.replace(correction.wrong, correction.correct);
+                }
+            });
+            
+            if (correctedCount > 0) {
+                quill.root.innerHTML = currentContent;
+                document.getElementById('postContent').value = currentContent;
+                showToastMessage(`✅ Đã sửa ${correctedCount} lỗi chính tả phổ biến!`);
+            } else {
+                showToastMessage('✓ Không tìm thấy lỗi chính tả nào!');
+            }
+        }
+        
+        function exportToWord() {
+            if (!quill) return;
+            
+            const content = quill.root.innerHTML;
+            const title = document.getElementById('postTitle').value || 'Blog Post';
+            const category = document.getElementById('postCategory').value || 'Chưa phân loại';
+            const excerpt = document.getElementById('postExcerpt').value || '';
+            
+            const html = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${title}</title>
+                    <style>
+                        @page {
+                            margin: 2.5cm;
+                            size: A4;
+                        }
+                        body { 
+                            font-family: 'Times New Roman', serif; 
+                            line-height: 1.6; 
+                            color: #333;
+                            font-size: 12pt;
+                        }
+                        h1 { 
+                            color: #2c3e50; 
+                            border-bottom: 3px solid #3498db;
+                            padding-bottom: 10px;
+                            page-break-after: avoid;
+                        }
+                        h2, h3 { 
+                            color: #34495e; 
+                            page-break-after: avoid;
+                        }
+                        h2 { border-bottom: 2px solid #ecf0f1; padding-bottom: 5px; }
+                        code { 
+                            background: #f8f9fa; 
+                            padding: 2px 6px; 
+                            border-radius: 3px; 
+                            font-family: 'Courier New', monospace;
+                            font-size: 11pt;
+                        }
+                        pre { 
+                            background: #2c3e50; 
+                            color: #ecf0f1;
+                            padding: 15px; 
+                            border-radius: 8px; 
+                            overflow-x: auto;
+                            page-break-inside: avoid;
+                            font-family: 'Courier New', monospace;
+                            font-size: 10pt;
+                        }
+                        blockquote { 
+                            border-left: 4px solid #3498db; 
+                            margin: 20px 0; 
+                            padding-left: 20px; 
+                            font-style: italic;
+                            background: #f8f9fa;
+                            padding: 15px 20px;
+                            border-radius: 0 8px 8px 0;
+                        }
+                        table { 
+                            border-collapse: collapse; 
+                            width: 100%; 
+                            margin: 20px 0;
+                            page-break-inside: avoid;
+                        }
+                        th, td { 
+                            border: 1px solid #ddd; 
+                            padding: 12px; 
+                            text-align: left; 
+                        }
+                        th { 
+                            background-color: #3498db; 
+                            color: white;
+                            font-weight: bold;
+                        }
+                        .meta-info {
+                            background: #ecf0f1;
+                            padding: 20px;
+                            border-radius: 8px;
+                            margin-bottom: 30px;
+                            page-break-inside: avoid;
+                        }
+                        .footer {
+                            position: fixed;
+                            bottom: 1cm;
+                            width: 100%;
+                            text-align: center;
+                            font-size: 10pt;
+                            color: #7f8c8d;
+                        }
+                        ul, ol { margin: 15px 0; }
+                        li { margin: 5px 0; }
+                        p { margin: 12px 0; text-align: justify; }
+                        hr { 
+                            border: none; 
+                            border-top: 2px solid #bdc3c7; 
+                            margin: 30px 0; 
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="meta-info">
+                        <h1 style="margin-top: 0; border: none;">${title}</h1>
+                        <p><strong>📂 Danh mục:</strong> ${category}</p>
+                        <p><strong>📅 Ngày tạo:</strong> ${new Date().toLocaleDateString('vi-VN', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</p>
+                        ${excerpt ? `<p><strong>📝 Mô tả:</strong> ${excerpt}</p>` : ''}
+                        <p><strong>📊 Thống kê:</strong> ${quill.getText().split(/\s+/).filter(w => w.length > 0).length} từ • ${Math.ceil(quill.getText().split(/\s+/).filter(w => w.length > 0).length / 200)} phút đọc</p>
+                    </div>
+                    
+                    ${content}
+                    
+                    <div class="footer">
+                        <p>Tài liệu được tạo từ Y Phai Niê Blog - ${new Date().toLocaleDateString('vi-VN')}</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            const blob = new Blob([html], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}.doc`;
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            showToastMessage('📄 Đã export thành công file Word! Check thư mục Downloads.');
+        }
+        
+        // Save function integrated with Quill
+        function savePostQuill() {
+            if (!quill) {
+                alert('⚠️ Editor chưa sẵn sàng!');
+                return;
+            }
+            
+            // Update hidden textarea with Quill content
+            document.getElementById('postContent').value = quill.root.innerHTML;
+            
+            // Call the blog manager save function
+            if (window.blogManager && window.blogManager.savePost) {
+                window.blogManager.savePost();
+                updateLastSaved('manual');
+                
+                // Clear draft after successful save
+                localStorage.removeItem('blogDraft');
+            } else {
+                alert('❌ Không thể lưu bài viết. Vui lòng thử lại!');
+            }
+        }
+        
+        // Utility function for showing toast messages
+        function showToastMessage(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toastMessage');
+            
+            if (toast && messageEl) {
+                messageEl.textContent = message;
+                
+                // Show toast
+                toast.style.transform = 'translateX(0)';
+                
+                // Auto hide after 3 seconds
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(400px)';
+                }, 3000);
+            }
+        }
+        
+        // Override form submission to use Quill
+        window.addEventListener('load', () => {
+            const form = document.getElementById('postForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    savePostQuill();
+                });
+            }
+            
+            // Override preview function
+            window.previewPost = function() {
+                if (!quill) {
+                    alert('⚠️ Editor chưa sẵn sàng!');
+                    return;
+                }
+                
+                const title = document.getElementById('postTitle').value;
+                const content = quill.root.innerHTML;
+                const previewArea = document.getElementById('previewArea');
+                
+                if (!title || !content || content === '<p><br></p>') {
+                    previewArea.innerHTML = '<p style="text-align: center; color: #dc3545;">⚠️ Vui lòng nhập tiêu đề và nội dung để xem trước</p>';
+                    return;
+                }
+                
+                previewArea.innerHTML = `
+                    <div style="border: 2px solid #28a745; border-radius: 10px; padding: 20px; background: white;">
+                        <h1 style="color: #2c3e50; margin-bottom: 20px; border-bottom: 2px solid #3498db; padding-bottom: 10px;">${title}</h1>
+                        <div style="line-height: 1.8;">${content}</div>
+                    </div>
+                `;
+                
+                showToastMessage('👀 Preview đã được cập nhật!');
+            };
+        });
+    </script>
+</body>
+</html>

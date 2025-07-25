@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="postTitle">Chi tiết bài viết - Y Phai Niê</title>
+    <meta name="description" id="postMeta" content="Đọc bài viết chi tiết trên blog Y Phai Niê">
+    <link rel="icon" type="image/png" href="https://github.com/youngestwall.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .post-detail-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .post-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .post-hero img {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        .post-meta-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .post-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .post-content-detail {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .post-content-detail h1 {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .post-content-detail h2 {
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .post-content-detail h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+        
+        .post-content-detail p {
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .post-content-detail ul, .post-content-detail ol {
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .post-content-detail li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-content-detail code {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        
+        .post-content-detail pre {
+            background: rgba(40, 44, 52, 0.95);
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .post-content-detail pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-share {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .share-btn.facebook:hover { background: #1877f2; color: white; }
+        .share-btn.twitter:hover { background: #1da1f2; color: white; }
+        .share-btn.linkedin:hover { background: #0077b5; color: white; }
+        
+        .not-found {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .not-found i {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .post-detail-container {
+                padding: 1rem;
+            }
+            
+            .post-content-detail {
+                padding: 2rem 1.5rem;
+            }
+            
+            .post-content-detail h1 {
+                font-size: 2rem;
+            }
+            
+            .post-meta-info {
+                gap: 1rem;
+            }
+            
+            .social-share {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body style="background: var(--background-light); min-height: 100vh;">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://github.com/youngestwall.png" alt="Y Phai Niê" class="logo-img">
+                <span class="logo-text">Y Phai Niê</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Trang Chủ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin.html" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        CMS
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        Về Tôi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        Liên Hệ
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="post-detail-container" id="postDetailContainer">
+        <!-- Content will be loaded here by JavaScript -->
+        <div class="not-found">
+            <i class="fas fa-spinner fa-spin"></i>
+            <h2>Đang tải bài viết...</h2>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>🚀 Về Blog</h3>
+                    <p>Blog cá nhân chia sẻ kiến thức về AI, Machine Learning, Web Development và những trải nghiệm học tập thú vị.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/youngestwall" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="mailto:phainie03@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="https://youngestwall.github.io" target="_blank"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>📚 Danh Mục</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-robot"></i> AI & Machine Learning</a></li>
+                        <li><a href="index.html"><i class="fas fa-code"></i> Web Development</a></li>
+                        <li><a href="index.html"><i class="fas fa-mobile-alt"></i> Mobile Development</a></li>
+                        <li><a href="https://youngestwall.github.io" target="_blank"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>📧 Thông Tin Liên Hệ</h3>
+                    <ul>
+                        <li><a href="mailto:phainie03@gmail.com"><i class="fas fa-envelope"></i> phainie03@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Vietnam</a></li>
+                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Computer Science Student</a></li>
+                        <li><a href="#"><i class="fas fa-robot"></i> AI Enthusiast</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Y Phai Niê Blog. Made with ❤️ from Vietnam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Load post detail
+        function loadPostDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            const container = document.getElementById('postDetailContainer');
+            
+            const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            
+            if (!postId) {
+                showDefaultPost();
+                return;
+            }
+            
+            const post = posts.find(p => p.id == postId);
+            
+            if (!post) {
+                showNotFound();
+                return;
+            }
+            
+            showPost(post);
+        }
+        
+        function showPost(post) {
+            // Update page title and meta
+            document.title = `${post.title} - Y Phai Niê`;
+            document.getElementById('postMeta').setAttribute('content', post.excerpt);
+            
+            const container = document.getElementById('postDetailContainer');
+            container.innerHTML = `
+                <div class="post-hero">
+                    <img src="${post.image}" alt="${escapeHtml(post.title)}" loading="lazy">
+                    <div class="post-meta-info">
+                        <div class="post-meta-item">
+                            <i class="fas fa-tag"></i>
+                            ${post.category}
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${post.date}
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="fas fa-clock"></i>
+                            ${Math.ceil(post.content.split(' ').length / 200)} phút đọc
+                        </div>
+                    </div>
+                </div>
+                
+                <article class="post-content-detail">
+                    <h1>${escapeHtml(post.title)}</h1>
+                    <div class="post-body">
+                        ${post.content}
+                    </div>
+                </article>
+                
+                <div class="post-actions">
+                    <a href="index.html" style="text-decoration: none;">
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 0.8rem 1.5rem; background: rgba(255, 255, 255, 0.95); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 25px; color: var(--text-secondary); transition: all 0.3s ease; backdrop-filter: blur(20px);">
+                            <i class="fas fa-arrow-left"></i>
+                            Về trang chủ
+                        </div>
+                    </a>
+                    
+                    <div class="social-share">
+                        <a href="#" onclick="shareOnFacebook('${escapeHtml(post.title)}')" class="share-btn facebook">
+                            <i class="fab fa-facebook"></i>
+                            Facebook
+                        </a>
+                        <a href="#" onclick="shareOnTwitter('${escapeHtml(post.title)}')" class="share-btn twitter">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </a>
+                        <a href="#" onclick="shareOnLinkedIn('${escapeHtml(post.title)}')" class="share-btn linkedin">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showDefaultPost() {
+            const defaultPost = {
+                title: "Khởi đầu hành trình AI và Machine Learning",
+                category: "🤖 AI & Machine Learning",
+                date: new Date().toLocaleDateString('vi-VN'),
+                image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
+                content: `
+                    <h2>🚀 Giới thiệu về AI và Machine Learning</h2>
+                    <p>Trí tuệ nhân tạo (AI) và Học máy (Machine Learning) đang thay đổi thế giới một cách mạnh mẽ. Trong bài viết này, chúng ta sẽ cùng khám phá những khái niệm cơ bản và cách bắt đầu học tập hiệu quả.</p>
+                    
+                    <h3>📚 Các khái niệm cơ bản</h3>
+                    <ul>
+                        <li><strong>Artificial Intelligence (AI):</strong> Khả năng máy tính mô phỏng trí thông minh con người</li>
+                        <li><strong>Machine Learning (ML):</strong> Phương pháp dạy máy tính học từ dữ liệu</li>
+                        <li><strong>Deep Learning:</strong> Mạng neural sâu mô phỏng não bộ con người</li>
+                    </ul>
+                    
+                    <h3>🛠️ Công cụ và ngôn ngữ</h3>
+                    <p>Để bắt đầu với AI/ML, bạn cần học:</p>
+                    <ul>
+                        <li><strong>Python:</strong> Ngôn ngữ phổ biến nhất cho AI/ML</li>
+                        <li><strong>TensorFlow/PyTorch:</strong> Framework cho Deep Learning</li>
+                        <li><strong>Scikit-learn:</strong> Thư viện ML cơ bản</li>
+                        <li><strong>Jupyter Notebook:</strong> Môi trường phát triển tương tác</li>
+                    </ul>
+                    
+                    <h3>🎯 Lộ trình học tập</h3>
+                    <ol>
+                        <li>Nắm vững Python cơ bản</li>
+                        <li>Học toán: Linear Algebra, Statistics, Calculus</li>
+                        <li>Thực hành với dataset đơn giản</li>
+                        <li>Xây dựng project thực tế</li>
+                    </ol>
+                    
+                    <p><em>Hành trình học AI/ML cần kiên trì và thực hành liên tục. Hãy bắt đầu ngay hôm nay!</em></p>
+                `
+            };
+            showPost(defaultPost);
+        }
+        
+        function showNotFound() {
+            const container = document.getElementById('postDetailContainer');
+            container.innerHTML = `
+                <div class="not-found">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>Không tìm thấy bài viết</h2>
+                    <p>Bài viết bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
+                    <a href="index.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 1rem 2rem; background: var(--primary-gradient); color: white; text-decoration: none; border-radius: 25px; margin-top: 2rem;">
+                        <i class="fas fa-home"></i>
+                        Về trang chủ
+                    </a>
+                </div>
+            `;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function shareOnFacebook(title) {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+        
+        function shareOnTwitter(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(title);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+        }
+        
+        function shareOnLinkedIn(title) {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+        }
+        
+        // Load post when page loads
+        document.addEventListener('DOMContentLoaded', loadPostDetail);
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+*.temp
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Dependency directories (nếu có dùng npm/yarn)
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs (nếu có build process)
+dist/
+build/
+out/
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Next.js build output (nếu có dùng Next.js sau này)
+.next/
+
+# Nuxt.js build / generate output (nếu có dùng Nuxt.js sau này)
+.nuxt
+dist
+
+# Gatsby files (nếu có dùng Gatsby sau này)
+.cache/
+public
+
+# Storybook build outputs (nếu có dùng Storybook)
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Local configuration files
+*.local
+
+# Database files (nếu có local database)
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup files
+*.bak
+*.backup
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+
+# Draft và backup files từ CMS
+drafts/
+backups/
+blog-backup-*.json
+
+# Local storage exports
+localStorage-*.json
+
+# Test coverage
+coverage/
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# StyleLint cache
+.stylelintcache
+
+# Optional: Development tools
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Optional: Nếu có sử dụng TypeScript
+*.tsbuildinfo
+
+# Optional: Nếu có sử dụng Sass/SCSS compiled files
+*.css.map
+*.scss.map
+
+# Error logs từ browser
+error.log
+debug.log
