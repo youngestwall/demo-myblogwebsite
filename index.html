@@ -1,305 +1,599 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Y Phai Niê Blog - Trang Chủ</title>
-    <meta name="description" content="Blog cá nhân của Y Phai Niê - Sinh viên CS đam mê AI, chia sẻ kiến thức về công nghệ, lập trình và cuộc sống">
-    <meta name="keywords" content="blog, technology, AI, programming, Vietnam, student">
-    <link rel="icon" type="image/png" href="https://github.com/youngestwall.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
+    <meta
+      name="description"
+      content="Blog cá nhân của Y Phai Niê - Sinh viên CS đam mê AI, chia sẻ kiến thức về công nghệ, lập trình và cuộc sống"
+    />
+    <meta
+      name="keywords"
+      content="blog, technology, AI, programming, Vietnam, student"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://github.com/youngestwall.png"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <!-- Modern Header with Glass Morphism -->
     <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <a href="index.html">
-                        <img src="https://github.com/youngestwall.png" alt="Y Phai Niê" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                        <span>Y Phai Niê Blog</span>
-                    </a>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link active">
-                            <i class="fas fa-home"></i>
-                            Trang Chủ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="admin.html" class="nav-link" style="background: rgba(255, 255, 255, 0.3); border-radius: 20px; font-weight: 600;">
-                            <i class="fas fa-cog"></i>
-                            CMS
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">
-                            <i class="fas fa-user"></i>
-                            Về Tôi
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link">
-                            <i class="fas fa-envelope"></i>
-                            Liên Hệ
-                        </a>
-                    </li>
-                </ul>
-                <div class="nav-toggle" id="mobile-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="index.html">
+              <img
+                src="https://github.com/youngestwall.png"
+                alt="Y Phai Niê"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  margin-right: 10px;
+                "
+              />
+              <span>Y Phai Niê Blog</span>
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link active">
+                <i class="fas fa-home"></i>
+                Trang Chủ
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="admin.html"
+                class="nav-link"
+                style="
+                  background: rgba(255, 255, 255, 0.3);
+                  border-radius: 20px;
+                  font-weight: 600;
+                "
+              >
+                <i class="fas fa-cog"></i>
+                CMS
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">
+                <i class="fas fa-user"></i>
+                Về Tôi
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">
+                <i class="fas fa-envelope"></i>
+                Liên Hệ
+              </a>
+            </li>
+          </ul>
+          <div class="nav-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Ultra-Modern Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>🚀 Chào Mừng Đến Với Blog Của Y Phai Niê</h1>
-            <p>Khám phá thế giới AI, công nghệ và lập trình qua những câu chuyện, kiến thức và trải nghiệm thú vị từ một sinh viên CS đam mê sáng tạo</p>
-            <a href="#posts" class="cta-button">
-                <i class="fas fa-rocket"></i>
-                Khám Phá Bài Viết
-            </a>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div style="position: absolute; top: 20%; left: 10%; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
-        <div style="position: absolute; top: 60%; right: 15%; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
-        <div style="position: absolute; bottom: 30%; left: 20%; width: 60px; height: 60px; background: rgba(255,255,255,0.12); border-radius: 50%; animation: float 10s ease-in-out infinite;"></div>
+      <div class="hero-content">
+        <h1>🚀 Chào Mừng Đến Với Blog Của Y Phai Niê</h1>
+        <p>
+          Khám phá thế giới AI, công nghệ và lập trình qua những câu chuyện,
+          kiến thức và trải nghiệm thú vị từ một sinh viên CS đam mê sáng tạo
+        </p>
+        <a href="#posts" class="cta-button">
+          <i class="fas fa-rocket"></i>
+          Khám Phá Bài Viết
+        </a>
+      </div>
+
+      <!-- Floating Elements -->
+      <div
+        style="
+          position: absolute;
+          top: 20%;
+          left: 10%;
+          width: 100px;
+          height: 100px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          animation: float 6s ease-in-out infinite;
+        "
+      ></div>
+      <div
+        style="
+          position: absolute;
+          top: 60%;
+          right: 15%;
+          width: 80px;
+          height: 80px;
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 50%;
+          animation: float 8s ease-in-out infinite reverse;
+        "
+      ></div>
+      <div
+        style="
+          position: absolute;
+          bottom: 30%;
+          left: 20%;
+          width: 60px;
+          height: 60px;
+          background: rgba(255, 255, 255, 0.12);
+          border-radius: 50%;
+          animation: float 10s ease-in-out infinite;
+        "
+      ></div>
     </section>
 
     <!-- Modern Main Content -->
     <main class="main-content" id="posts">
-        <div class="container">
-            <!-- Featured Post Section -->
-            <section class="featured-post">
-                <h2>✨ Bài Viết Nổi Bật</h2>
-                <article class="post-card featured">
-                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=400&fit=crop" 
-                         alt="Xu hướng công nghệ 2025" 
-                         class="post-image"
-                         loading="lazy">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-date">
-                                <i class="far fa-calendar"></i> 
-                                20 Tháng 7, 2025
-                            </span>
-                            <span class="post-category">🔥 Công Nghệ</span>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="post-detail.html?id=1">Những Xu Hướng Công Nghệ Đột Phá Năm 2025</a>
-                        </h3>
-                        <p class="post-excerpt">
-                            Khám phá những xu hướng công nghệ mới nhất sẽ định hình tương lai trong năm 2025, từ AI generative đến quantum computing, và tác động của chúng đến cuộc sống hàng ngày...
-                        </p>
-                        <a href="post-detail.html?id=1" class="read-more">
-                            Đọc Thêm <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-            </section>
+      <div class="container">
+        <!-- Featured Post Section -->
+        <section class="featured-post">
+          <h2>✨ Bài Viết Nổi Bật</h2>
+          <article class="post-card featured">
+            <img
+              src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=400&fit=crop"
+              alt="Xu hướng công nghệ 2025"
+              class="post-image"
+              loading="lazy"
+            />
+            <div class="post-content">
+              <div class="post-meta">
+                <span class="post-date">
+                  <i class="far fa-calendar"></i>
+                  20 Tháng 7, 2025
+                </span>
+                <span class="post-category">🔥 Công Nghệ</span>
+              </div>
+              <h3 class="post-title">
+                <a href="post-detail.html?id=1"
+                  >Những Xu Hướng Công Nghệ Đột Phá Năm 2025</a
+                >
+              </h3>
+              <p class="post-excerpt">
+                Khám phá những xu hướng công nghệ mới nhất sẽ định hình tương
+                lai trong năm 2025, từ AI generative đến quantum computing, và
+                tác động của chúng đến cuộc sống hàng ngày...
+              </p>
+              <a href="post-detail.html?id=1" class="read-more">
+                Đọc Thêm <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+        </section>
 
-            <!-- Recent Posts Section -->
-            <section class="recent-posts">
-                <h2>📝 Bài Viết Gần Đây</h2>
-                <div class="posts-grid">
-                    <article class="post-card">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop" 
-                             alt="Machine Learning cho người mới bắt đầu" 
-                             class="post-image"
-                             loading="lazy">
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-date">
-                                    <i class="far fa-calendar"></i> 
-                                    18 Tháng 7, 2025
-                                </span>
-                                <span class="post-category">🤖 AI/ML</span>
-                            </div>
-                            <h3 class="post-title">
-                                <a href="post-detail.html?id=2">Machine Learning Cho Người Mới Bắt Đầu</a>
-                            </h3>
-                            <p class="post-excerpt">
-                                Hướng dẫn từng bước để bắt đầu hành trình Machine Learning, từ những khái niệm cơ bản đến việc xây dựng model đầu tiên...
-                            </p>
-                            <a href="post-detail.html?id=2" class="read-more">
-                                Đọc Thêm <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="post-card">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" 
-                             alt="Web Development với React và Node.js" 
-                             class="post-image"
-                             loading="lazy">
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-date">
-                                    <i class="far fa-calendar"></i> 
-                                    15 Tháng 7, 2025
-                                </span>
-                                <span class="post-category">💻 Web Dev</span>
-                            </div>
-                            <h3 class="post-title">
-                                <a href="post-detail.html?id=3">Full-Stack Development với React & Node.js</a>
-                            </h3>
-                            <p class="post-excerpt">
-                                Xây dựng ứng dụng web hiện đại với React frontend và Node.js backend, từ setup project đến deployment production...
-                            </p>
-                            <a href="post-detail.html?id=3" class="read-more">
-                                Đọc Thêm <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="post-card">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop" 
-                             alt="Cuộc sống sinh viên CS" 
-                             class="post-image"
-                             loading="lazy">
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-date">
-                                    <i class="far fa-calendar"></i> 
-                                    12 Tháng 7, 2025
-                                </span>
-                                <span class="post-category">🎓 Sinh Viên</span>
-                            </div>
-                            <h3 class="post-title">
-                                <a href="post-detail.html?id=4">Những Bài Học Từ Hành Trình CS Student</a>
-                            </h3>
-                            <p class="post-excerpt">
-                                Chia sẻ những trải nghiệm, thử thách và bài học quý giá trong hành trình học Computer Science tại Việt Nam...
-                            </p>
-                            <a href="post-detail.html?id=4" class="read-more">
-                                Đọc Thêm <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
+        <!-- Recent Posts Section -->
+        <section class="recent-posts">
+          <h2>📝 Bài Viết Gần Đây</h2>
+          <div class="posts-grid">
+            <article class="post-card">
+              <img
+                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop"
+                alt="Machine Learning cho người mới bắt đầu"
+                class="post-image"
+                loading="lazy"
+              />
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date">
+                    <i class="far fa-calendar"></i>
+                    18 Tháng 7, 2025
+                  </span>
+                  <span class="post-category">🤖 AI/ML</span>
                 </div>
-            </section>
+                <h3 class="post-title">
+                  <a href="post-detail.html?id=2"
+                    >Machine Learning Cho Người Mới Bắt Đầu</a
+                  >
+                </h3>
+                <p class="post-excerpt">
+                  Hướng dẫn từng bước để bắt đầu hành trình Machine Learning, từ
+                  những khái niệm cơ bản đến việc xây dựng model đầu tiên...
+                </p>
+                <a href="post-detail.html?id=2" class="read-more">
+                  Đọc Thêm <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
 
-            <!-- Quick Stats Section -->
-            <section style="margin-top: 5rem; margin-bottom: 3rem;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                    <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: var(--border-radius-xl); padding: 2rem; text-align: center; transition: all var(--transition-normal);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'">
-                        <div style="background: var(--primary-gradient); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
-                            <i class="fas fa-blog"></i>
-                        </div>
-                        <h3 style="font-size: 2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">25+</h3>
-                        <p style="color: var(--text-secondary); font-weight: 500;">Bài Viết</p>
-                    </div>
-                    
-                    <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: var(--border-radius-xl); padding: 2rem; text-align: center; transition: all var(--transition-normal);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'">
-                        <div style="background: var(--secondary-gradient); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem;">10K+</h3>
-                        <p style="color: var(--text-secondary); font-weight: 500;">Lượt Xem</p>
-                    </div>
-                    
-                    <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: var(--border-radius-xl); padding: 2rem; text-align: center; transition: all var(--transition-normal);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'">
-                        <div style="background: var(--accent-gradient); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <h3 style="font-size: 2rem; font-weight: 700; color: #4facfe; margin-bottom: 0.5rem;">500+</h3>
-                        <p style="color: var(--text-secondary); font-weight: 500;">Yêu Thích</p>
-                    </div>
-                    
-                    <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: var(--border-radius-xl); padding: 2rem; text-align: center; transition: all var(--transition-normal);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'">
-                        <div style="background: var(--success-gradient); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3 style="font-size: 2rem; font-weight: 700; color: #43e97b; margin-bottom: 0.5rem;">200+</h3>
-                        <p style="color: var(--text-secondary); font-weight: 500;">Bình Luận</p>
-                    </div>
+            <article class="post-card">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop"
+                alt="Web Development với React và Node.js"
+                class="post-image"
+                loading="lazy"
+              />
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date">
+                    <i class="far fa-calendar"></i>
+                    15 Tháng 7, 2025
+                  </span>
+                  <span class="post-category">💻 Web Dev</span>
                 </div>
-            </section>
-        </div>
+                <h3 class="post-title">
+                  <a href="post-detail.html?id=3"
+                    >Full-Stack Development với React & Node.js</a
+                  >
+                </h3>
+                <p class="post-excerpt">
+                  Xây dựng ứng dụng web hiện đại với React frontend và Node.js
+                  backend, từ setup project đến deployment production...
+                </p>
+                <a href="post-detail.html?id=3" class="read-more">
+                  Đọc Thêm <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <article class="post-card">
+              <img
+                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
+                alt="Cuộc sống sinh viên CS"
+                class="post-image"
+                loading="lazy"
+              />
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date">
+                    <i class="far fa-calendar"></i>
+                    12 Tháng 7, 2025
+                  </span>
+                  <span class="post-category">🎓 Sinh Viên</span>
+                </div>
+                <h3 class="post-title">
+                  <a href="post-detail.html?id=4"
+                    >Những Bài Học Từ Hành Trình CS Student</a
+                  >
+                </h3>
+                <p class="post-excerpt">
+                  Chia sẻ những trải nghiệm, thử thách và bài học quý giá trong
+                  hành trình học Computer Science tại Việt Nam...
+                </p>
+                <a href="post-detail.html?id=4" class="read-more">
+                  Đọc Thêm <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Quick Stats Section -->
+        <section style="margin-top: 5rem; margin-bottom: 3rem">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+              gap: 2rem;
+            "
+          >
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: var(--border-radius-xl);
+                padding: 2rem;
+                text-align: center;
+                transition: all var(--transition-normal);
+              "
+              onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'"
+            >
+              <div
+                style="
+                  background: var(--primary-gradient);
+                  color: white;
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 1rem;
+                  font-size: 1.5rem;
+                "
+              >
+                <i class="fas fa-blog"></i>
+              </div>
+              <h3
+                style="
+                  font-size: 2rem;
+                  font-weight: 700;
+                  color: var(--primary-color);
+                  margin-bottom: 0.5rem;
+                "
+              >
+                25+
+              </h3>
+              <p style="color: var(--text-secondary); font-weight: 500">
+                Bài Viết
+              </p>
+            </div>
+
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: var(--border-radius-xl);
+                padding: 2rem;
+                text-align: center;
+                transition: all var(--transition-normal);
+              "
+              onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'"
+            >
+              <div
+                style="
+                  background: var(--secondary-gradient);
+                  color: white;
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 1rem;
+                  font-size: 1.5rem;
+                "
+              >
+                <i class="fas fa-eye"></i>
+              </div>
+              <h3
+                style="
+                  font-size: 2rem;
+                  font-weight: 700;
+                  color: var(--accent-color);
+                  margin-bottom: 0.5rem;
+                "
+              >
+                10K+
+              </h3>
+              <p style="color: var(--text-secondary); font-weight: 500">
+                Lượt Xem
+              </p>
+            </div>
+
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: var(--border-radius-xl);
+                padding: 2rem;
+                text-align: center;
+                transition: all var(--transition-normal);
+              "
+              onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'"
+            >
+              <div
+                style="
+                  background: var(--accent-gradient);
+                  color: white;
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 1rem;
+                  font-size: 1.5rem;
+                "
+              >
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3
+                style="
+                  font-size: 2rem;
+                  font-weight: 700;
+                  color: #4facfe;
+                  margin-bottom: 0.5rem;
+                "
+              >
+                500+
+              </h3>
+              <p style="color: var(--text-secondary); font-weight: 500">
+                Yêu Thích
+              </p>
+            </div>
+
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: var(--border-radius-xl);
+                padding: 2rem;
+                text-align: center;
+                transition: all var(--transition-normal);
+              "
+              onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-xl)'"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-lg)'"
+            >
+              <div
+                style="
+                  background: var(--success-gradient);
+                  color: white;
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 1rem;
+                  font-size: 1.5rem;
+                "
+              >
+                <i class="fas fa-comments"></i>
+              </div>
+              <h3
+                style="
+                  font-size: 2rem;
+                  font-weight: 700;
+                  color: #43e97b;
+                  margin-bottom: 0.5rem;
+                "
+              >
+                200+
+              </h3>
+              <p style="color: var(--text-secondary); font-weight: 500">
+                Bình Luận
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
     <!-- Ultra-Modern Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>🚀 Y Phai Niê Blog</h3>
-                    <p>Nơi chia sẻ những câu chuyện, kiến thức và trải nghiệm thú vị về cuộc sống và công nghệ từ một sinh viên CS đam mê AI và sáng tạo.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/youngestwall/" target="_blank" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://x.com/youngestwall" target="_blank" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/youngestwall/" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/youngestwall" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>🔗 Liên Kết Nhanh</h3>
-                    <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Trang Chủ</a></li>
-                        <li><a href="about.html"><i class="fas fa-user"></i> Về Tôi</a></li>
-                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Liên Hệ</a></li>
-                        <li><a href="https://youngestwall.github.io" target="_blank"><i class="fas fa-briefcase"></i> Portfolio</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>📧 Thông Tin Liên Hệ</h3>
-                    <ul>
-                        <li><a href="mailto:phainie03@gmail.com"><i class="fas fa-envelope"></i> phainie03@gmail.com</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Vietnam</a></li>
-                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Computer Science Student</a></li>
-                        <li><a href="#"><i class="fas fa-robot"></i> AI Enthusiast</a></li>
-                    </ul>
-                </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>🚀 Y Phai Niê Blog</h3>
+            <p>
+              Nơi chia sẻ những câu chuyện, kiến thức và trải nghiệm thú vị về
+              cuộc sống và công nghệ từ một sinh viên CS đam mê AI và sáng tạo.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/youngestwall/"
+                target="_blank"
+                aria-label="Instagram"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://x.com/youngestwall"
+                target="_blank"
+                aria-label="Twitter"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/youngestwall/"
+                target="_blank"
+                aria-label="LinkedIn"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a
+                href="https://github.com/youngestwall"
+                target="_blank"
+                aria-label="GitHub"
+              >
+                <i class="fab fa-github"></i>
+              </a>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Y Phai Niê Blog. Made with ❤️ from Vietnam. All rights reserved.</p>
-            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>🔗 Liên Kết Nhanh</h3>
+            <ul>
+              <li>
+                <a href="index.html"><i class="fas fa-home"></i> Trang Chủ</a>
+              </li>
+              <li>
+                <a href="about.html"><i class="fas fa-user"></i> Về Tôi</a>
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-envelope"></i> Liên Hệ</a
+                >
+              </li>
+              <li>
+                <a href="https://youngestwall.github.io" target="_blank"
+                  ><i class="fas fa-briefcase"></i> Portfolio</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>📧 Thông Tin Liên Hệ</h3>
+            <ul>
+              <li>
+                <a href="mailto:phainie03@gmail.com"
+                  ><i class="fas fa-envelope"></i> phainie03@gmail.com</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Vietnam</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-graduation-cap"></i> Computer Science
+                  Student</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-robot"></i> AI Enthusiast</a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 Y Phai Niê Blog. Made with ❤️ from Vietnam. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <script src="js/script.js"></script>
     <script>
-        // Load blog posts dynamically
-        function loadBlogPosts() {
-            const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-            const container = document.querySelector('.featured-posts .posts-grid');
-            
-            if (!container) return;
-            
-            if (posts.length === 0) {
-                // Show default posts if no custom posts exist
-                container.innerHTML = getDefaultPosts();
-                return;
-            }
-            
-            // Show latest 6 posts
-            const latestPosts = posts.slice(0, 6);
-            
-            container.innerHTML = latestPosts.map(post => `
-                <article class="post-card floating-animation" onclick="window.location.href='post-detail.html?id=${post.id}'">
+      // Load blog posts dynamically
+      function loadBlogPosts() {
+        const posts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+        const container = document.querySelector(".featured-posts .posts-grid");
+
+        if (!container) return;
+
+        if (posts.length === 0) {
+          // Show default posts if no custom posts exist
+          container.innerHTML = getDefaultPosts();
+          return;
+        }
+
+        // Show latest 6 posts
+        const latestPosts = posts.slice(0, 6);
+
+        container.innerHTML = latestPosts
+          .map(
+            (post) => `
+                <article class="post-card floating-animation" onclick="window.location.href='post-detail.html?id=${
+                  post.id
+                }'">
                     <div class="post-image">
-                        <img src="${post.image}" alt="${escapeHtml(post.title)}" loading="lazy">
+                        <img src="${post.image}" alt="${escapeHtml(
+              post.title
+            )}" loading="lazy">
                         <div class="post-category">${post.category}</div>
                     </div>
                     <div class="post-content">
@@ -313,11 +607,13 @@
                         </div>
                     </div>
                 </article>
-            `).join('');
-        }
-        
-        function getDefaultPosts() {
-            return `
+            `
+          )
+          .join("");
+      }
+
+      function getDefaultPosts() {
+        return `
                 <article class="post-card floating-animation" onclick="window.location.href='post-detail.html'">
                     <div class="post-image">
                         <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=300&fit=crop" alt="AI và Machine Learning" loading="lazy">
@@ -329,7 +625,7 @@
                         <div class="post-meta">
                             <span class="post-date">
                                 <i class="far fa-calendar-alt"></i>
-                                ${new Date().toLocaleDateString('vi-VN')}
+                                ${new Date().toLocaleDateString("vi-VN")}
                             </span>
                         </div>
                     </div>
@@ -346,7 +642,7 @@
                         <div class="post-meta">
                             <span class="post-date">
                                 <i class="far fa-calendar-alt"></i>
-                                ${new Date().toLocaleDateString('vi-VN')}
+                                ${new Date().toLocaleDateString("vi-VN")}
                             </span>
                         </div>
                     </div>
@@ -363,25 +659,25 @@
                         <div class="post-meta">
                             <span class="post-date">
                                 <i class="far fa-calendar-alt"></i>
-                                ${new Date().toLocaleDateString('vi-VN')}
+                                ${new Date().toLocaleDateString("vi-VN")}
                             </span>
                         </div>
                     </div>
                 </article>
             `;
-        }
-        
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-        
-        // Load posts when page loads
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
-        
-        // Check for blog updates every 30 seconds
-        setInterval(loadBlogPosts, 30000);
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Load posts when page loads
+      document.addEventListener("DOMContentLoaded", loadBlogPosts);
+
+      // Check for blog updates every 30 seconds
+      setInterval(loadBlogPosts, 30000);
     </script>
-</body>
+  </body>
 </html>

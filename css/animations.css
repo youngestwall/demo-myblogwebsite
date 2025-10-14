@@ -1,0 +1,165 @@
+/* Animation Utility Classes */
+.fade-in {
+  animation: fadeIn 0.5s var(--animation-timing);
+}
+
+.slide-in {
+  animation: slideIn 0.5s var(--animation-timing);
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.rotate {
+  animation: rotate 10s linear infinite;
+}
+
+/* Enhanced Component Animations */
+.navbar {
+  animation: slideIn 0.5s var(--animation-timing);
+}
+
+.hero-content {
+  animation: fadeIn 0.8s var(--animation-timing);
+}
+
+.card {
+  transition: transform 0.3s var(--animation-timing);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.post-card {
+  transition: all 0.3s var(--animation-timing);
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  transition: all 0.2s var(--animation-timing);
+  position: relative;
+  overflow: hidden;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite;
+}
+
+/* Form Input Animations */
+.input-field {
+  transition: border-color 0.3s var(--animation-timing),
+    box-shadow 0.3s var(--animation-timing);
+}
+
+.input-field:focus {
+  transform: translateY(-1px);
+}
+
+/* Menu Animation */
+.menu-item {
+  position: relative;
+  transition: color 0.3s var(--animation-timing);
+}
+
+.menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  transition: width 0.3s var(--animation-timing);
+}
+
+.menu-item:hover::after {
+  width: 100%;
+}
+
+/* Loading Animation */
+.loading {
+  position: relative;
+}
+
+.loading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* Scroll Animation */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s var(--animation-timing);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Interactive Elements */
+.interactive-element {
+  transition: all 0.3s var(--animation-timing);
+}
+
+.interactive-element:hover {
+  transform: scale(1.05);
+}
+
+/* Social Media Icons */
+.social-icon {
+  transition: all 0.3s var(--animation-timing);
+}
+
+.social-icon:hover {
+  transform: rotate(360deg) scale(1.2);
+}
+
+/* Page Transitions */
+.page-transition {
+  animation: fadeIn 0.5s var(--animation-timing);
+}
+
+/* Floating Elements Animation */
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
