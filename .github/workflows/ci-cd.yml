@@ -1,0 +1,55 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install HTMLHint
+        run: npm install -g htmlhint
+
+      - name: Install Stylelint
+        run: npm install -g stylelint stylelint-config-standard
+
+      - name: Lint HTML
+        run: htmlhint "*.html"
+
+      - name: Lint CSS
+        run: stylelint "css/*.css"
+
+  deploy:
+    needs: lint
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Nginx configuration
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nginx
+          sudo cp nginx.conf /etc/nginx/conf.d/default.conf
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment completed successfully!"
+          echo "Visit your site at https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
